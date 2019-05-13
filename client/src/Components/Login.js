@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom'
-
+import './CSS/Login.css'
 class Login extends Component {
     constructor() {
         super()
@@ -47,10 +47,10 @@ class Login extends Component {
 
     render () {
         return (
-              <form noValidate onSubmit={this.onSubmit}>  
-                <table>
+              <form  noValidate onSubmit={this.onSubmit}>  
+                <table id="loginTable">
                     <tr>
-                        <td>Email</td>
+                        <td class="word">Email</td>
                         <td>Password</td>
                     </tr>
                     <tr>
@@ -71,7 +71,7 @@ class Login extends Component {
                         <td>
                             <Button type="submit">Login</Button>
                         </td>
-                        <Link to="/register"><Button> Sign-up</Button> </Link>
+                        <Link to="/"><Button> Sign-up</Button> </Link>
                     </tr>
                     <tr>
                         
