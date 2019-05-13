@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode'
 import GetFriendList from './GetFriendList.js'
 import GetPosts from './GetPosts.js'
 import AddPost from './AddPost.js'
+import './CSS/Profile.css'
 
 const qs = require("query-string")
 
@@ -62,22 +63,28 @@ class Profile extends Component {
         var id = qs.parse(this.props.location.search, {ignoreQueryPrefix: true}).userId
 
         return ( 
-            <div className="pdiv">
-                    <table className="ptable">
-                    <tr>{this.state.username}</tr>
+            <div class="pdiv">
+                    <table class="ptable">
+                    <tr>Username: {this.state.username}</tr>
                         <tr className="ptr">
-                            <td>{this.state.name}</td>
+                            <td>Name: {this.state.name}</td>
                         </tr>
                         <tr className="ptr">
-                            <td>{this.state.email}</td>
+                            <td>Email: {this.state.email}</td>
                         </tr>
                         <tr><td><br/></td></tr>
                         <tr className="ptr">
                         </tr>
                     </table>
                     {/*<GetFriendList/>*/}
-                    <GetPosts id = {id}/>
+                    <div class="addposts">
                     <AddPost id = {id}/>
+                    </div>
+                    
+                    <div class="posts"> 
+                    <GetPosts id = {id}/>
+                    </div>
+
             </div>
         )
     }

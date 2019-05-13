@@ -21,7 +21,7 @@ create table if not exists userPost(
 	postId int(5) not null auto_increment,
 	userId int(5) not null,
 	content varchar(1000),
-	postDate timestamp not null default(curdate()),
+	--  timestamp not null default(curdate()),
 	primary key(postId)
 ); /*ENGINE = InnoDB DEFAULT CHARSET = latin1*/
 
@@ -30,7 +30,7 @@ create table if not exists userComment(
 	postId int(5) not null,
 	userId int(5) not null,
 	comment varchar(1000),
-	commentDate timestamp not null default(curdate()),
+	-- commentDate timestamp not null default(curdate()),
 	primary key(commentId)
 ); /*ENGINE = InnoDB DEFAULT CHARSET = latin1*/
 
@@ -51,10 +51,10 @@ insert into friendList(friendId, userId) values(2, 1);
 insert into friendList(friendId, userId) values(3, 1);
 insert into friendList(friendId, userId) values(4, 1);
 
-insert into userPost(userId, content, postDate) values(1, "FUCK LIFE", curdate());
-insert into userPost(userId, content, postDate) values(2, "Shut up", curdate());
-insert into userPost(userId, content, postDate) values(3, "Comsci life is the high life", curdate());
-insert into userPost(userId, content, postDate) values(4, "Hello everyone", curdate());
+insert into userPost(userId, content) values(1, "FUCK LIFE");
+insert into userPost(userId, content ) values(2, "Shut up");
+insert into userPost(userId, content ) values(3, "Comsci life is the high life");
+insert into userPost(userId, content ) values(4, "Hello everyone");
 
 insert into userComment(postId, userId, comment) values(3, 1, "True dat my friend");
 insert into userComment(postId, userId, comment) values(1, 1, "Bye bye");

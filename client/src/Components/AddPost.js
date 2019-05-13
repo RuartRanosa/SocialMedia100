@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
+import './CSS/AddPost.css'
 
 class AddPost extends Component{
 	constructor(){
@@ -45,11 +46,11 @@ class AddPost extends Component{
     render(){
     	return(
     		<form onSubmit={this.handleSubmit}>
-                <label>
-                    What's on your mind?
-                    <textarea content={this.state.content} onChange={this.handleChange} />
+                <label class="postCommentSection">
+                    
+                    <textarea class="commentBox" content={this.state.content} onChange={this.handleChange} placeholder="What's on your mind" />
                 </label>
-                <input type="submit" value="Submit" />
+                <input class="submitButton" type="submit" value="Post" />
             </form>
     	)
     }

@@ -1,0 +1,28 @@
+.pdiv{
+	background-color: #032131;
+	height: 100vh;
+	color: #E6EBEE;
+	font-family: Helvetica;
+}
+
+.ptable{
+	background-color: #053752;
+	border-radius: 10px;
+	padding: 10px 5px 0 5px;
+	position: relative;
+	left: 40%;
+	top: 5%;
+}	
+
+.addposts{
+	position: relative;
+	margin-top: 5%;
+	/*background-color: white;*/
+	height: 130px;
+	width: 900px;
+	left: 24%;
+	border-style: solid;
+	border-color: #053752;
+	border-style: solid;
+	border-radius: 20px;
+}

@@ -10,6 +10,7 @@ class App extends Component {
     render() {
         return (
             <Router>
+                
                 <Navbar/>
                 <Route exact path="/" component={Register} />
                 <Route exact path="/login" component={Login} />

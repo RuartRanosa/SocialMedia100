@@ -1,0 +1,26 @@
+.postCommentSection{
+	position: relative;
+	left: 33%;
+	background-color: white;
+}
+
+.commentBox{
+	resize: none;
+	width: 30%;
+	height: 30%;
+	position:relative;
+	top: 30px;
+	border-radius: 5px;
+	border-style: solid;
+	padding-left: ;
+	background-color: ;
+
+}
+
+.submitButton{
+	position: relative;
+	margin-top: 4px;
+	left: 15%;
+	top:70px;
+
+}

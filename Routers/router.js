@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 const express = require("express")
 const app = express.Router()
-
 const jwt = require("jsonwebtoken")
 const bcryptjs = require("bcryptjs")
 const cors = require("cors")
@@ -12,9 +11,9 @@ process.env.SECRET_KEY = 'secret'
 
 let connection = mysql.createPool({
     host: '0.0.0.0',
-    // port: '3333',
+    port: '3306',
     user: 'root',
-    password: '',
+    password: 'helloworld',
     database: 'socialMedia',
     connectionLimit: 10
 });
