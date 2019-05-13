@@ -140,8 +140,81 @@ connection.getConnection(function(err) {
 	    })
 	})
 
+	app.post('/delete-post', function(req, res){	
+	    connection.query('delete from userPost where postId = '+req.body.postId+';', (err, result)=>{
+	    	if(!err){
+			    return res.send({success: true})
+	    	}else{
+	    		console.log("Failed")
+	    		return res.send({success: false})
+	    	}
+	    })
+	})
+
+	app.post('/edit-post', function(req, res){	
+	    connection.query('update userPost set content = "'+req.body.content+'" where userId = '+req.body.userId+' and postId = '+req.body.postId+';', (err, result)=>{
+	    	if(!err){
+			    return res.send({success: true})
+	    	}else{
+	    		console.log(err)
+	    		return res.send({success: false})
+	    	}
+	    })
+	})
 
 
+	app.post('/add-comment', function(req, res){	
+		const commentData = {
+	        userId: req.body.userId,
+	        postId: req.body.postId,
+	        comment: req.body.comment 
+	    }
+	    connection.query('insert into userComment(postId, userId, comment) values('+commentData.postId+', '+commentData.userId+', "'+commentData.comment+'");', (err, result)=>{
+	    	if(!err){
+			    return res.send({success: true})
+	    	}else{
+	    		console.log(err)
+	    		return res.send({success: false})
+	    	}
+	    })
+	})
+
+	app.post('/delete-comment', function(req, res){	
+	    connection.query('delete from userComment where commentId = '+req.body.commentId+';', (err, result)=>{
+	    	if(!err){
+			    return res.send({success: true})
+	    	}else{
+	    		console.log("Failed")
+	    		return res.send({success: false})
+	    	}
+	    })
+	})
+
+	app.post('/edit-comment', function(req, res){	
+	    connection.query('update userComment set comment = "'+req.body.comment+'" where userId = '+req.body.userId+' and commentId = '+req.body.commentId+';', (err, result)=>{
+	    	if(!err){
+			    return res.send({success: true})
+	    	}else{
+	    		console.log(err)
+	    		return res.send({success: false})
+	    	}
+	    })
+	})
+
+	app.get('/get-comments', function(req, res){
+		console.log(req.query.userId)
+		console.log(req.query.postId)
+		connection.query('select C.*, U.username from user U, userComment C where C.userId = U.userId and C.postId = '+req.query.postId+';', (err, result) => {
+			if(!err){			 																			
+				console.log(result)
+				return res.send({success: true, result})
+			}else{
+				console.log(err)
+				return res.send({success: false})
+	            // return res.send(400, 'Couldnt get a connection');															// returns an error message if the connection fails
+	        }
+		})
+	})
   }
 });
 

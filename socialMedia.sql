@@ -56,4 +56,5 @@ insert into userPost(userId, content, postDate) values(2, "Shut up", curdate());
 insert into userPost(userId, content, postDate) values(3, "Comsci life is the high life", curdate());
 insert into userPost(userId, content, postDate) values(4, "Hello everyone", curdate());
 
-insert into userComment(postId, userId, comment, commentDate) values(3, 1, "True dat my friend", curdate());
+insert into userComment(postId, userId, comment) values(3, 1, "True dat my friend");
+insert into userComment(postId, userId, comment) values(1, 1, "Bye bye");

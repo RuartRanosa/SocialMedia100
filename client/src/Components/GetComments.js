@@ -2,50 +2,40 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
-import AddComment from './AddComment.js'
-import GetComments from './GetComments.js'
 
-class GetPosts extends Component{
+class GetComments extends Component{
 	constructor(){
         super()
         this.state = {
             userId: 0,
-            postId:0,
-            posts: [],        
+            commentId:0,
             edit: false,
-            makeComment:false,
-            newPost:"",
+            newComment: "",
+            comments: []        
         }
-        this.getPost = this.getPost.bind(this)
-        this.deletePost = this.deletePost.bind(this)
-        this.addComment = this.addComment.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.editPost = this.editPost.bind(this)
-
+        this.deleteComment = this.deleteComment.bind(this)
+        this.editComment = this.editComment.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    addComment(){
-        this.setState({makeComment: true});
-    }
-
     handleChange(event) {
-        this.setState({newPost: event.target.value});
+        this.setState({newComment: event.target.value});
       }
 
-    handleSubmit(event){
-        const post = {
-            content: this.state.newPost,
+    handleSubmit(event, commentId){
+        const comment = {
+            comment: this.state.newComment,
             userId: this.props.id,
-            postId: this.state.postId
+            commentId: this.state.commentId
         }
-        fetch('http://localhost:3000/edit-post',
+        fetch('http://localhost:3000/edit-comment',
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(post)
+            body: JSON.stringify(comment)
           })
           .then(response => response.json())
           .then(body => {
@@ -58,26 +48,25 @@ class GetPosts extends Component{
           event.preventDefault()
     }
 
-    editPost(postId){
+    editComment(commentId){
         this.setState({
             edit:true,
-            postId: postId
+            commentId: commentId
         })
     }
 
-
-    deletePost(postId){
-        const post = {
-            postId: postId,
+    deleteComment(commentId){
+        const comment = {
+            commentId: commentId,
             
         }
-        fetch('http://localhost:3000/delete-post/?userId='+postId,
+        fetch('http://localhost:3000/delete-comment/?commentId='+commentId,
         {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(post)
+            body: JSON.stringify(comment)
           })
             .then((response) => { return response.json() })
             .then((res) => {
@@ -87,18 +76,7 @@ class GetPosts extends Component{
             .catch((e) => { console.log(e)});
 
     }
-
-
-    getPost(userId){
-    	fetch('http://localhost:3000/get-posts/?userId='+userId)
-            .then((response) => { return response.json() })
-            .then((res) => {
-                console.log(res.result)
-                this.setState({posts: res.result})
-            })
-            .catch((e) => { console.log(e)});
-    }
-
+    
     componentDidMount(){
       if(localStorage.usertoken){
         var token = localStorage.usertoken
@@ -106,35 +84,37 @@ class GetPosts extends Component{
         this.setState({
             userId: decoded.userId
         })
-        fetch('http://localhost:3000/get-posts/?userId='+this.props.id)
+        console.log(this.props.id)
+        console.log(this.props.postId)
+        fetch('http://localhost:3000/get-comments/?userId='+this.props.id+"&postId="+this.props.postId)
             .then((response) => { return response.json() })
             .then((res) => {
                 console.log(res.result)
-                this.setState({posts: res.result})
+                this.setState({comments: res.result})
             })
-            .catch((e) => { console.log(e)});
+            .catch((e) => { console.log(e)});    
       }
     }
 
     render(){
 
-    	const PostList = () => {
-    		const options = this.state.posts.map((i) => (
+    	const CommentList = () => {
+    		const options = this.state.comments.map((i) => (
         		<div>	
                     <ul>
                         <Link to = {'/profile/?userId='+i.userId}>
                             <li>{i.username}</li>    
                         </Link> 
-                        {i.content}
+                        {i.comment}
                         <br/>
-                        {this.props.id == this.state.userId ? 
-                            <Button onClick = {() => this.deletePost(i.postId)}> Delete</Button> : ""}
                         {this.props.id == this.state.userId ?
-                            <Button onClick = {() => this.editPost(i.postId)}> Edit Post</Button> : ""}
+                        <Button onClick = {() => this.deleteComment(i.commentId)}> Delete Comment</Button> : ""}
+                        {this.props.id == this.state.userId ?
+                        <Button onClick = {() => this.editComment(i.commentId)}> Edit Comment</Button> : ""}
 
-                        {this.state.makeComment ? <AddComment userId = {this.state.userId} postId = {i.postId}/> : ""}
-                        <Button onClick = {() => this.addComment()}> Add Comment</Button> 
-                        <GetComments id = {i.userId} postId = {i.postId}/>
+
+        
+                        
                     </ul>
                 </div>    
 	        ))
@@ -142,17 +122,17 @@ class GetPosts extends Component{
 	     }
     	return(
     		<div>
+    			<CommentList/>
                 {this.state.edit ?
                             <form onSubmit={this.handleSubmit}>
                                 <label>
                                     What's on your mind?
-                                    <textarea content={this.state.newPost} onChange={this.handleChange} />
+                                    <textarea content={this.state.newComment} onChange={this.handleChange} />
                                 </label>
                                 <input type="submit"  value="Submit" />
                             </form> : ""}
-    			<PostList/>
     		</div>
     	)
     }
 }
-export default GetPosts;
+export default GetComments;
