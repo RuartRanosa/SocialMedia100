@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import './CSS/Register.css'
 class Register extends Component {
     constructor() {
         super()
@@ -49,13 +49,14 @@ class Register extends Component {
 
     render () {
         return (
-                <div>
-                <form noValidate onSubmit={this.onSubmit}>
+                <div id="main">
+                <form id="signUpForm" noValidate onSubmit={this.onSubmit}>
                             <h1>Sign-up</h1>
-                            <div>
+                            <div >
                                 <label>Username:</label>
                                 <input type="text"
                                     name = "username"
+                                    class="signUpInputBox"
                                     placeholder="Enter Username"
                                     value={this.state.username}
                                     onChange={this.onChange} />
@@ -64,6 +65,7 @@ class Register extends Component {
                                 <label>Name: </label>
                                 <input type="text"
                                     name = "display_name"
+                                    class="signUpInputBox"
                                     placeholder="Enter Display Name"
                                     value={this.state.display_name}
                                     onChange={this.onChange} />
@@ -72,6 +74,7 @@ class Register extends Component {
                                 <label>Birthday</label>
                                 <input type="text"
                                     name="birthday"
+                                    class="signUpInputBox"
                                     placeholder="mm/dd/yy"
                                     value={this.state.birthday}
                                     onChange={this.onChange} />
@@ -80,6 +83,7 @@ class Register extends Component {
                                 <label>Email Address</label>
                                 <input type="email"
                                     name="email"
+                                    class="signUpInputBox"
                                     placeholder="Enter Email"
                                     value={this.state.email}
                                     onChange={this.onChange} />
@@ -88,14 +92,17 @@ class Register extends Component {
                                 <label>Password</label>
                                 <input type="password"
                                     name="password"
+                                    class="signUpInputBox"
                                     placeholder="Enter Password"
                                     value={this.state.password}
                                     onChange={this.onChange} />
                             </div>
                             <button type="submit" 
-                                className = "search-button">
+                                class = "registerButton">
                                 Register
                             </button>
+                            <div> <a class="forgotPasswordButton" href=""> Forgot Password </a> </div>
+
                     </form>
                     </div>
 

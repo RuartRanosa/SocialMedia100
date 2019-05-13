@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode'
 import GetFriendList from './GetFriendList.js'
 import GetPosts from './GetPosts.js'
 import AddPost from './AddPost.js'
-
+import './CSS/Profile.css'
 const qs = require("query-string")
 
 
@@ -165,29 +165,46 @@ class Profile extends Component {
             return <ul>{options}</ul>
          }
         return ( 
-            <div className="pdiv">
-                    <table className="ptable">
-                    <tr>{this.state.username}</tr>
+            <div class="pdiv">
+                    <table class="ptable">
+                        <tr> Username: {this.state.username}</tr>
                         <tr className="ptr">
-                            <td>{this.state.name}</td>
+                            <td>Name: {this.state.name}</td>
                         </tr>
                         <tr className="ptr">
-                            <td>{this.state.email}</td>
+                            <td>Email: {this.state.email}</td>
                         </tr>
                         <tr><td><br/></td></tr>
                         <tr className="ptr">
                         </tr>
                     </table>
                     {/*<GetFriendList/>*/}
+
+                     
                     {this.state.userId !== localStorage.userId ? <Button onClick = {() => this.sendFriendRequest(this.state.userId)}>Friend Request</Button>: ""}
-
-                    {this.state.userId == localStorage.userId ? <Button onClick = {() => this.showRequests()}>Show Friend Requests</Button>
+                   
+                     
+                    {this.state.userId == localStorage.userId ?  <Button class="friendRequestButton" onClick = {() => this.showRequests()}>   Show Friend Requests </Button>
                     : ""}
-                    <RequestList/>
-                    <GetFriendList userId={id}/>
-                    <GetPosts id = {id}/>
+                    
 
+                    <div class="friendRequests"> 
+                    <RequestList/>
+                    </div>
+                    
+
+                    <div class="friendsList">
+                    <GetFriendList userId={id}/>
+                    </div>
+
+
+                    <div class="addPosts">
                     <AddPost userId = {localStorage.userId} id = {id}/>
+                    </div>
+
+                    <div class="otherPosts"> 
+                    <GetPosts id = {id}/>
+                    </div>
             </div>
         )
     }

@@ -4,7 +4,8 @@ import { Link, withRouter } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import jwt_decode from 'jwt-decode'
-
+import './CSS/Navbar.css'
+// import {Logo} from './Media/final.jpg'
 class Navbar extends Component {
     constructor(){
         super()
@@ -79,19 +80,19 @@ class Navbar extends Component {
         )
 
         const userLink = (
-            <div className="header">
+            <div class="header">
                 <table>
                     <tr><p></p></tr>
                     <tr><p></p></tr>
                     <tr>
                     <td>
                         <Link to = {"/profile/?userId="+this.state.userId}>
-                            <Button className="header-button"> Profile </Button>
+                            <Button class="header-button"> Profile </Button>
                         </Link>
                     </td>
                     <td>
                         <Link to="" onClick={this.logOut.bind(this)}>
-                            <Button className="header-button">Logout</Button>
+                            <Button class="header-button" s>Logout</Button>
                         </Link>
                     
                     </td>
@@ -103,21 +104,29 @@ class Navbar extends Component {
         )
         {/*=======================================================================================================*/}
         return (
-            <header className="App-header">
-                <div className="clogo">
-                    {localStorage.usertoken ? <Link to="/wall">Social Media </Link>:<Link to="/">Social Media </Link>}
+            <header class="App-header">
+
+                <div class="clogo">
+                
+                    {localStorage.usertoken ? <Link to="/wall"> Social Media  <img src="./Media/final.png" /></Link>:<Link to="/">  Social Media <img src="./Media/final.png" /></Link>}
                 </div>
-                {localStorage.usertoken ? userLink : loginRegLink}
-                <article className="csearch-bars">
-                      <input type="text" 
-                        className="search" 
-                        name="Search"
-                        placeholder="Search for a user"
-                        value={this.state.query}
-                        onChange={this.searchUser}
-                      />
-                      <Suggestions/>
-                    </article>
+                
+                <div class="loginButtons">
+                  {localStorage.usertoken ? userLink : loginRegLink}
+                </div>
+                
+                <div class="searchBarContainer">
+                  <article class="csearch-bars">
+                    <input type="text" 
+                      class="search" 
+                      name="Search"
+                      placeholder="Search for a user"
+                      value={this.state.query}
+                      onChange={this.searchUser}
+                    />
+                    <Suggestions/>
+                  </article>
+                </div>
             </header>
         )
     }

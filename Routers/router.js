@@ -12,10 +12,11 @@ process.env.SECRET_KEY = 'secret'
 
 let connection = mysql.createPool({
     host: '0.0.0.0',
-    // port: '3333',
+     // port: '3306',
     user: 'root',
     password: '',
     database: 'socialMedia',
+    socketPath: '/var/run/mysqld/mysqld.sock',
     connectionLimit: 10
 });
 

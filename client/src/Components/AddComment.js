@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
-
+// import './CSS/AddComment.css'
 class AddComment extends Component{
 	constructor(){
         super()
@@ -46,11 +46,11 @@ class AddComment extends Component{
     render(){
     	return(
     		<form onSubmit={this.handleSubmit}>
-                <label>
+                <label class="commentSection">
                     Comment <br/> 
                     <textarea comment={this.state.comment} onChange={this.handleChange} />
                 </label>
-                <input type="submit" value="Submit" />
+                <input class="commentButton" type="submit" value="Post" />
             </form>
     	)
     }

@@ -4,8 +4,8 @@ import { Link, withRouter } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 import AddPost from './AddPost.js'
 import GetPosts from './GetPosts.js'
-
 import GetFriendList from './GetFriendList.js'
+import './CSS/Wall.css'
 
 class Wall extends Component {
     constructor(){
@@ -30,10 +30,19 @@ class Wall extends Component {
       var token = localStorage.usertoken
       var decoded = jwt_decode(token)
       return (  
-        <div>
-          <AddPost userId = {localStorage.userId} id = {decoded.userId}/>
-          <GetPosts id={decoded.userId}/>
-          <GetFriendList userId={decoded.userId}/>
+        <div class="wall">
+        
+          <div class="addPost">
+            <AddPost userId = {localStorage.userId} id = {decoded.userId}/>
+          </div>
+
+          <div class="getPost">
+            <GetPosts id={decoded.userId}/>
+          </div>
+
+          <div class="getFriendList">
+            <GetFriendList userId={decoded.userId}/>
+          </div>
         </div>
       );         
     }

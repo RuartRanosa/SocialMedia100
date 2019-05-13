@@ -23,6 +23,10 @@
   color: #61dafb;
 }
 
+.router{
+  background-color: #b4c3cb;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
