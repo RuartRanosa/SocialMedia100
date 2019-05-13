@@ -110,6 +110,7 @@ class GetPosts extends Component{
             .then((response) => { return response.json() })
             .then((res) => {
                 console.log(res.result)
+                console.log(res.result[0].username)
                 this.setState({posts: res.result})
             })
             .catch((e) => { console.log(e)});

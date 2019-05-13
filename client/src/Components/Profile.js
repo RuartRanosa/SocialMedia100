@@ -186,7 +186,8 @@ class Profile extends Component {
                     <RequestList/>
                     <GetFriendList userId={id}/>
                     <GetPosts id = {id}/>
-                    <AddPost id = {id}/>
+
+                    <AddPost userId = {localStorage.userId} id = {id}/>
             </div>
         )
     }

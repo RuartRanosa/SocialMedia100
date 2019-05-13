@@ -31,7 +31,7 @@ class Wall extends Component {
       var decoded = jwt_decode(token)
       return (  
         <div>
-          <AddPost id = {decoded.userId}/>
+          <AddPost userId = {localStorage.userId} id = {decoded.userId}/>
           <GetPosts id={decoded.userId}/>
           <GetFriendList userId={decoded.userId}/>
         </div>

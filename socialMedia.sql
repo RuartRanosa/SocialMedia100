@@ -20,6 +20,7 @@ create table if not exists friendList(
 create table if not exists userPost(
 	postId int(5) not null auto_increment,
 	userId int(5) not null,
+	wallId int(5) not null,
 	content varchar(1000),
 	postDate timestamp not null default(curdate()),
 	primary key(postId)
@@ -52,10 +53,10 @@ insert into friendList(friendId, userId) values(2, 1);
 insert into friendList(friendId, userId) values(3, 1);
 insert into friendList(friendId, userId) values(4, 1);
 
-insert into userPost(userId, content, postDate) values(1, "FUCK LIFE", curdate());
-insert into userPost(userId, content, postDate) values(2, "Shut up", curdate());
-insert into userPost(userId, content, postDate) values(3, "Comsci life is the high life", curdate());
-insert into userPost(userId, content, postDate) values(4, "Hello everyone", curdate());
+insert into userPost(userId, wallId, content, postDate) values(1, 1, "FUCK LIFE", curdate());
+insert into userPost(userId, wallId, content, postDate) values(2, 1, "Shut up", curdate());
+insert into userPost(userId, wallId, content, postDate) values(3, 2, "Comsci life is the life", curdate());
+insert into userPost(userId, wallId, content, postDate) values(4, 2, "Hello everyone", curdate());
 
 insert into userComment(postId, userId, comment) values(3, 1, "True dat my friend");
 insert into userComment(postId, userId, comment) values(1, 1, "Bye bye");

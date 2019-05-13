@@ -19,7 +19,8 @@ class AddPost extends Component{
       }
     handleSubmit(event){
         const post = {
-            userId: this.props.id,
+            userId: localStorage.userId,
+            wallId: this.props.id,
             content: this.state.content
         }
         fetch('http://localhost:3000/add-post',

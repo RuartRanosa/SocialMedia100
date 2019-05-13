@@ -155,11 +155,12 @@ connection.getConnection(function(err) {
 
 	app.get('/get-posts', function(req, res){
 		console.log("USER POST"+req.query.userId)
-		connection.query('select P.*, U.username from userPost P, user U where P.userId ='+req.query.userId+' and P.userId = U.userId;', (err, result) => {
+		connection.query('select P.*, U.username from userPost P, user U where (P.userId = '+req.query.userId+' and P.userId = U.userId) or (P.wallId = '+req.query.userId+ ' and U.userId = P.userId);', (err, result) => {
 			if(!err){			 																			
 				console.log(result)
 				return res.send({success: true, result})
 			}else{
+				console.log(err)
 				return res.send({success: false})
 	            // return res.send(400, 'Couldnt get a connection');															// returns an error message if the connection fails
 	        }
@@ -169,9 +170,10 @@ connection.getConnection(function(err) {
 	app.post('/add-post', function(req, res){	
 		const postData = {
 	        userId: req.body.userId,
+	        wallId: req.body.wallId,
 	        content: req.body.content 
 	    }
-	    connection.query('insert into userPost(userId, content, postDate) values('+postData.userId+',"'+postData.content+'", curdate());', (err, result)=>{
+	    connection.query('insert into userPost(userId, wallId, content, postDate) values('+postData.userId+', '+postData.wallId+' , "'+postData.content+'", curdate());', (err, result)=>{
 	    	if(!err){
 			    return res.send({success: true})
 	    	}else{
