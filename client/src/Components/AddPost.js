@@ -46,7 +46,7 @@ class AddPost extends Component{
     	return(
     		<form onSubmit={this.handleSubmit}>
                 <label>
-                    What's on your mind?
+                    What's on your mind? <br/>
                     <textarea content={this.state.content} onChange={this.handleChange} />
                 </label>
                 <input type="submit" value="Submit" />

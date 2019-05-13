@@ -36,7 +36,8 @@ class Login extends Component {
           .then(response => response.json())
           .then(body => {
             if(body.success){
-                localStorage.setItem('usertoken', body.token) 
+                localStorage.setItem('usertoken', body.token)
+                localStorage.setItem('userId', body.userId) 
                 this.props.history.push(`/profile/?userId=`+body.userId)
             }else{ 
                 alert('Failed to login to account') 

@@ -32,7 +32,7 @@ class GetFriendList extends Component{
         this.setState({
             userId: decoded.userId
         })
-        fetch('http://localhost:3000/get-friends/?userId='+decoded.userId)
+        fetch('http://localhost:3000/get-friends/?userId='+this.props.userId)
             .then((response) => { return response.json() })
             .then((res) => {
                 console.log(res.result)

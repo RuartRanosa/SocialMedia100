@@ -86,6 +86,19 @@ connection.getConnection(function(err) {
 		})
 	})
 
+	app.get('/search-user', function(req, res){
+		connection.query('select * from user where username = "'+req.query.username+'";', (err, result) => {
+			if(!err){			 																				
+				console.log(result)
+				return res.send({success: true, result})
+			}else{
+				console.log(err)
+				return res.send({success: false})
+	            // return res.send(400, 'Couldnt get a connection');															// returns an error message if the connection fails
+	        }
+		})
+	})	
+
 	app.get('/get-friends', function(req, res){
 		console.log(req.query.userId)
 		connection.query('select P.*, U.username from friendList P, user U where P.userId = '+req.query.userId+' and P.friendId = U.userId;', (err, result) => {
@@ -99,6 +112,34 @@ connection.getConnection(function(err) {
 		})
 	})
 	
+	app.post('/add-friend', function(req, res){	
+	    connection.query('insert into friendList(friendId, userId) values('+req.body.friendId+', '+req.body.userId+');', (err, result)=>{
+	    	if(!err){
+	    		connection.query('delete from friendRequest where userId = '+req.body.friendId+' and friendId = '+req.body.userId+';', (err, result) =>{
+			    	if(!err){
+			    		return res.send({success: true})
+			    	}else{
+			    		console.log(err)
+			    		return res.send({success: false})
+			    	}
+	    		})
+	    	}else{
+	    		console.log(err)
+	    		return res.send({success: false})
+	    	}
+	    })
+	})
+	app.post('/reject-friend', function(req, res){	
+		connection.query('delete from friendRequest where userId = '+req.body.friendId+' and friendId = '+req.body.userId+';', (err, result) =>{
+	    	if(!err){
+	    		return res.send({success: true})
+	    	}else{
+	    		console.log(err)
+	    		return res.send({success: false})
+	    	}
+		})
+	})
+
 	app.get('/get-user', function(req, res){
 		console.log(req.query.userId)
 		connection.query('select username, name, email, about, birthday from user where userId = '+req.query.userId+';', (err, result) => {
@@ -215,6 +256,35 @@ connection.getConnection(function(err) {
 	        }
 		})
 	})
+
+	app.post('/send-friend-request', function(req, res){	
+		const requestData = {
+	        userId: req.body.userId,
+	        friendId: req.body.friendId 
+	    }
+	    connection.query('insert into friendRequest(userId, friendId) values('+requestData.userId+', '+requestData.friendId+');', (err, result)=>{
+	    	if(!err){
+			    return res.send({success: true})
+	    	}else{
+	    		console.log(err)
+	    		return res.send({success: false})
+	    	}
+	    })
+	})
+
+	app.get('/get-friend-request', function(req, res){
+		connection.query('select F.*, U.username from friendRequest F, user U where F.userId = U.userId and F.friendId = '+req.query.userId+';', (err, result) => {
+			if(!err){			 																			
+				console.log(result)
+				return res.send({success: true, result})
+			}else{
+				console.log(err)
+				return res.send({success: false})
+	            // return res.send(400, 'Couldnt get a connection');															// returns an error message if the connection fails
+	        }
+		})
+	})
+
   }
 });
 

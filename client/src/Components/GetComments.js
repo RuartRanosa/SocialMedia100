@@ -107,9 +107,9 @@ class GetComments extends Component{
                         </Link> 
                         {i.comment}
                         <br/>
-                        {this.props.id == this.state.userId ?
+                        {i.userId == localStorage.userId ?
                         <Button onClick = {() => this.deleteComment(i.commentId)}> Delete Comment</Button> : ""}
-                        {this.props.id == this.state.userId ?
+                        {i.userId == localStorage.userId ?
                         <Button onClick = {() => this.editComment(i.commentId)}> Edit Comment</Button> : ""}
 
 
@@ -124,13 +124,13 @@ class GetComments extends Component{
     		<div>
     			<CommentList/>
                 {this.state.edit ?
-                            <form onSubmit={this.handleSubmit}>
-                                <label>
-                                    What's on your mind?
-                                    <textarea content={this.state.newComment} onChange={this.handleChange} />
-                                </label>
-                                <input type="submit"  value="Submit" />
-                            </form> : ""}
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Comment:
+                            <textarea content={this.state.newComment} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit"  value="Submit" />
+                    </form> : ""}
     		</div>
     	)
     }

@@ -47,7 +47,7 @@ class AddComment extends Component{
     	return(
     		<form onSubmit={this.handleSubmit}>
                 <label>
-                    What's on your mind?
+                    Comment <br/> 
                     <textarea comment={this.state.comment} onChange={this.handleChange} />
                 </label>
                 <input type="submit" value="Submit" />

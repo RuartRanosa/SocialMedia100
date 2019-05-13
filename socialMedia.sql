@@ -39,6 +39,7 @@ create table if not exists friendRequest(
 	requestId int(5) not null auto_increment,
 	userId int(5) not null,
 	friendId int(5) not null,
+	pending boolean default false,
 	primary key(requestId)
 ); /*ENGINE = InnoDB DEFAULT CHARSET = latin1*/
 
@@ -58,3 +59,8 @@ insert into userPost(userId, content, postDate) values(4, "Hello everyone", curd
 
 insert into userComment(postId, userId, comment) values(3, 1, "True dat my friend");
 insert into userComment(postId, userId, comment) values(1, 1, "Bye bye");
+
+insert into friendRequest(userId, friendId) values(1, 2);
+insert into friendRequest(userId, friendId) values(1, 3);
+insert into friendRequest(userId, friendId) values(4, 1);
+insert into friendRequest(userId, friendId) values(2, 3);	

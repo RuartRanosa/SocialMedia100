@@ -9,9 +9,24 @@ class Navbar extends Component {
     constructor(){
         super()
         this.state = {
-            userId: 0
+            users: [],
+            userId: 0,
         }
+        this.searchUser = this.searchUser.bind(this)
     }
+
+    searchUser(e){
+    const query = e.target.value;
+
+    fetch('http://localhost:3000/search-user/?username='+query)
+          .then((response) => { return response.json() })
+          .then((res) => {
+              console.log(res.result)
+              this.setState({users: res.result})
+          })
+          .catch((e) => { console.log(e)});
+
+  }
 
     componentDidMount(){
         if(localStorage.usertoken){
@@ -28,7 +43,26 @@ class Navbar extends Component {
         this.props.history.push('/')
     }
 
-    render () {
+    render(){
+        const Suggestions = () => { 
+          const options = this.state.users.map((r) => (
+            <Link to = {"/profile/?userId="+r.userId}> 
+              <div>
+                <table>
+                    <td> 
+                      <li key={r.userId}>
+                        <div>
+                          <h5><span>{r.name}</span></h5>
+                        </div>
+                    </li>
+                    </td>
+               </table>
+              </div>
+            </Link>
+          ))
+          return <ul>{options}</ul>
+        }
+
         {/*==================== Content of menu changes depending if user is logged in or not ====================*/}
         const loginRegLink = (
             <div className="header">
@@ -74,6 +108,16 @@ class Navbar extends Component {
                     {localStorage.usertoken ? <Link to="/wall">Social Media </Link>:<Link to="/">Social Media </Link>}
                 </div>
                 {localStorage.usertoken ? userLink : loginRegLink}
+                <article className="csearch-bars">
+                      <input type="text" 
+                        className="search" 
+                        name="Search"
+                        placeholder="Search for a user"
+                        value={this.state.query}
+                        onChange={this.searchUser}
+                      />
+                      <Suggestions/>
+                    </article>
             </header>
         )
     }
