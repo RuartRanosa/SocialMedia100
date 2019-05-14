@@ -48,8 +48,7 @@ class GetFriendList extends Component{
     	const FriendList = () => {
     		const options = this.state.friends.map((i) => (
 	        	<div>
-
-                    <Link to = {'/profile/?userId='+i.userId}>
+                    <Link to = {'/profile/?userId='+i.friendId}>
                             <li>{i.username}</li>    
                     </Link>
 	        		

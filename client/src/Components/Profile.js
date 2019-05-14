@@ -192,7 +192,7 @@ class Profile extends Component {
                      
                     {this.state.userId !== localStorage.userId ? <Button onClick = {() => this.sendFriendRequest(this.state.userId)}>Friend Request</Button>: ""}
                    
-                    <Button onClick = {() => this.showFriends()}>Show Friends</Button>
+                    {localStorage.userId == id ? <Button onClick = {() => this.showFriends()}>Show Friends</Button> : ""}
                      {this.state.showFriends ? <GetFriendList userId={id}/> : ""}
 
                     {this.state.userId == localStorage.userId ?  <Button class="friendRequestButton" onClick = {() => this.showRequests()}>   Show Friend Requests </Button>
