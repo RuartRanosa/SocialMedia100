@@ -47,6 +47,12 @@ class Register extends Component {
           })
     }
 
+    componentDidMount(){
+        if(localStorage.usertoken){
+            this.props.history.push('/wall')
+        }
+    }
+
     render () {
         return (
                 <div id="main">
