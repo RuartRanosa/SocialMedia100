@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom'
-import './CSS/Login.css'
+// import './CSS/Login.css'
 class Login extends Component {
     constructor() {
         super()

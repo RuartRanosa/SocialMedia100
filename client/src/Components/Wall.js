@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode'
 import AddPost from './AddPost.js'
 import GetPosts from './GetPosts.js'
 import GetFriendList from './GetFriendList.js'
-import './CSS/Wall.css'
+// import './CSS/Wall.css'
 
 class Wall extends Component {
     constructor(){
@@ -41,7 +41,7 @@ class Wall extends Component {
           </div>
 
           <div class="getFriendList">
-            <GetFriendList userId={decoded.userId}/>
+            <GetFriendList showPosts = {true} userId={decoded.userId}/>
           </div>
         </div>
       );         

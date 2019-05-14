@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode'
 import GetFriendList from './GetFriendList.js'
 import GetPosts from './GetPosts.js'
 import AddPost from './AddPost.js'
-import './CSS/Profile.css'
+// import './CSS/Profile.css'
 const qs = require("query-string")
 
 
