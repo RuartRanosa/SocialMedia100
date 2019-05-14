@@ -53,7 +53,7 @@ class Navbar extends Component {
                     <td> 
                       <li key={r.userId}>
                         <div>
-                          <h5><span>{r.name}</span></h5>
+                          <h5><span>{r.username}<br/>{r.name}</span></h5>
                         </div>
                     </li>
                     </td>

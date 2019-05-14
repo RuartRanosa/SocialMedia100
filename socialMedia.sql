@@ -6,7 +6,7 @@ create table if not exists user(
 	username varchar(50),
 	name varchar(50),
 	email varchar(50),
-	password varchar(50),
+	password BLOB,
 	about varchar(1000), 
 	birthday varchar(50),
 	primary key(userId)
@@ -44,10 +44,10 @@ create table if not exists friendRequest(
 	primary key(requestId)
 ); /*ENGINE = InnoDB DEFAULT CHARSET = latin1*/
 
-insert into user(username, name, email, password, birthday) values("Ru", "John Philip Ruart M. Ranosa", "jmranosa@up.edu.ph", "password", "12/27/1998");
-insert into user(username, name, email, password, birthday) values("Jack", "Jack Reacher", "jack@up.edu.ph", "password", "12/17/1998");
-insert into user(username, name, email, password, birthday) values("Lailah", "Lailah Rose", "lailah@up.edu.ph", "password", "12/27/1997");
-insert into user(username, name, email, password, birthday) values("Ana", "Ana Maganda", "ana@up.edu.ph", "password", "12/27/1998");
+insert into user(username, name, email, password, birthday) values("Ru", "John Philip Ruart M. Ranosa", "jmranosa@up.edu.ph", AES_ENCRYPT("password", 'secret'), "12/27/1998");
+insert into user(username, name, email, password, birthday) values("Jack", "Jack Reacher", "jack@up.edu.ph", AES_ENCRYPT("password", 'secret'), "12/17/1998");
+insert into user(username, name, email, password, birthday) values("Lailah", "Lailah Rose", "lailah@up.edu.ph", AES_ENCRYPT("password", 'secret'), "12/27/1997");
+insert into user(username, name, email, password, birthday) values("Ana", "Ana Maganda", "ana@up.edu.ph", AES_ENCRYPT("password", 'secret'), "12/27/1998");
 
 insert into friendList(friendId, userId) values(2, 1);
 insert into friendList(friendId, userId) values(3, 1);

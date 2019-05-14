@@ -12,11 +12,10 @@ process.env.SECRET_KEY = 'secret'
 
 let connection = mysql.createPool({
     host: '0.0.0.0',
-     // port: '3306',
+    // port: '3333',
     user: 'root',
     password: '',
     database: 'socialMedia',
-    socketPath: '/var/run/mysqld/mysqld.sock',
     connectionLimit: 10
 });
 
@@ -43,7 +42,7 @@ connection.getConnection(function(err) {
 	    console.log(userData.username)
 	    connection.query("select email from user where email = '"+req.body.email+"';", (err, result)=>{
 	    	if(!err && result.length === 0){
-			    connection.query('insert into user(username, name, email, password, birthday) values("'+userData.username+'","'+userData.name+'","'+userData.email+'","'+userData.password+'","'+userData.birthday+'");', (err, response) => {
+			    connection.query('insert into user(username, name, email, password, birthday) values("'+userData.username+'","'+userData.name+'","'+userData.email+'", AES_ENCRYPT("'+userData.password+'", "secret"), "'+userData.birthday+'");', (err, response) => {
 			    	if(!err){
 						console.log("Register successful!")
 						return res.send({success: true})
@@ -63,7 +62,7 @@ connection.getConnection(function(err) {
 	app.post('/login', function(req, res){	
 		console.log(req.body.email)
 		console.log(req.body.password)
-	    connection.query('select userId, username, name, email, password from user where email = "'+req.body.email+'";', (err, result) => {
+	    connection.query('select userId, username, name, email, CAST(aes_decrypt(password, "secret") AS CHAR(10000) CHARACTER SET utf8) as password from user where email = "'+req.body.email+'";', (err, result) => {
 	    	console.log(result)
 			if(!err && result.length > 0){
 				if (req.body.password === result[0].password) {

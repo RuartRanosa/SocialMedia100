@@ -24,7 +24,7 @@ class Register extends Component {
         const user = {
             username: this.state.username,
             email: this.state.email,
-            name: this.state.ame,
+            name: this.state.name,
             password: this.state.password,
             birthday: this.state.birthday
         }
@@ -64,10 +64,10 @@ class Register extends Component {
                             <div>
                                 <label>Name: </label>
                                 <input type="text"
-                                    name = "display_name"
+                                    name = "name"
                                     class="signUpInputBox"
-                                    placeholder="Enter Display Name"
-                                    value={this.state.display_name}
+                                    placeholder="Enter Name"
+                                    value={this.state.name}
                                     onChange={this.onChange} />
                             </div>
                             <div>
