@@ -19,14 +19,20 @@ class Profile extends Component {
             name: '',
             email: '',
             posts: [],
-            requests: []
+            requests: [],
+            showFriends: false,
+            showRequests: false
         }
         this.sendFriendRequest = this.sendFriendRequest.bind(this)
         this.showRequests = this.showRequests.bind(this)
         this.addFriend = this.addFriend.bind(this)
         this.rejectFriend = this.rejectFriend.bind(this)
+        this.showFriends = this.showFriends.bind(this)
     }
 
+    showFriends(){
+        {this.state.showFriends ? this.setState({showFriends: false}) : this.setState({showFriends: true})}
+    }
     addFriend(id){
         const friendRequest = {
             userId: localStorage.userId,
@@ -76,6 +82,8 @@ class Profile extends Component {
     }
 
     showRequests(){
+        {this.state.showRequests ? this.setState({showRequests: false}) : this.setState({showRequests: true})}
+
         fetch('http://localhost:3000/get-friend-request/?userId='+localStorage.userId)
         .then((response) => { return response.json() })
         .then((res) => {
@@ -153,10 +161,11 @@ class Profile extends Component {
             const options = this.state.requests.map((i) => (
                 <div>   
                     <ul>
-                        
+                        <Link to = {'/profile/?userId='+i.userId}>
                             <li>{i.username}</li>    
-                            <Button onClick = {() => this.addFriend(i.userId)}>Accept</Button> 
-                            <Button onClick = {() => this.rejectFriend(i.userId)}>Reject</Button>
+                        </Link>    
+                        <Button onClick = {() => this.addFriend(i.userId)}>Accept</Button> 
+                        <Button onClick = {() => this.rejectFriend(i.userId)}>Reject</Button>
                         <br/>
                         
                     </ul>
@@ -183,18 +192,20 @@ class Profile extends Component {
                      
                     {this.state.userId !== localStorage.userId ? <Button onClick = {() => this.sendFriendRequest(this.state.userId)}>Friend Request</Button>: ""}
                    
-                     
+                    <Button onClick = {() => this.showFriends()}>Show Friends</Button>
+                     {this.state.showFriends ? <GetFriendList userId={id}/> : ""}
+
                     {this.state.userId == localStorage.userId ?  <Button class="friendRequestButton" onClick = {() => this.showRequests()}>   Show Friend Requests </Button>
                     : ""}
                     
 
                     <div class="friendRequests"> 
-                    <RequestList/>
+                    {this.state.showRequests ? <RequestList/> : ""}
                     </div>
                     
 
                     <div class="friendsList">
-                    <GetFriendList userId={id}/>
+                    <GetFriendList showPosts = {true} userId={id}/>
                     </div>
 
 

@@ -48,7 +48,13 @@ class GetFriendList extends Component{
     	const FriendList = () => {
     		const options = this.state.friends.map((i) => (
 	        	<div>
-	        		<GetPosts id={i.friendId}/>
+
+                    <Link to = {'/profile/?userId='+i.userId}>
+                            <li>{i.username}</li>    
+                    </Link>
+	        		
+                    {this.props.showPosts ? <GetPosts id={i.friendId}/> : ""}
+                    
 	        	</div>
 	        ))
 	        return <ul>{options}</ul>
